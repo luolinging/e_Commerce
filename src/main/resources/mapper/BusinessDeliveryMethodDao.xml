@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lll.ecommerce.dao.BusinessDeliveryMethodDao">
+  <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="delivery_method_id" jdbcType="BIGINT" property="deliveryMethodId" />
+    <result column="business_id" jdbcType="BIGINT" property="businessId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, delivery_method_id, business_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from business_delivery_method
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from business_delivery_method
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod" useGeneratedKeys="true">
+    insert into business_delivery_method (delivery_method_id, business_id)
+    values (#{deliveryMethodId,jdbcType=BIGINT}, #{businessId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod" useGeneratedKeys="true">
+    insert into business_delivery_method
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="deliveryMethodId != null">
+        delivery_method_id,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="deliveryMethodId != null">
+        #{deliveryMethodId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod">
+    update business_delivery_method
+    <set>
+      <if test="deliveryMethodId != null">
+        delivery_method_id = #{deliveryMethodId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod">
+    update business_delivery_method
+    set delivery_method_id = #{deliveryMethodId,jdbcType=BIGINT},
+      business_id = #{businessId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

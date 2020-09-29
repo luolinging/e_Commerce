@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lll.ecommerce.dao.OrderInventoryPreemptDao">
+  <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.OrderInventoryPreempt">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="preempt_amount" jdbcType="INTEGER" property="preemptAmount" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="order_id" jdbcType="BIGINT" property="orderId" />
+    <result column="inventory_id" jdbcType="BIGINT" property="inventoryId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, preempt_amount, `status`, order_id, inventory_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_inventory_preempt
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order_inventory_preempt
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.OrderInventoryPreempt" useGeneratedKeys="true">
+    insert into order_inventory_preempt (preempt_amount, `status`, order_id, 
+      inventory_id)
+    values (#{preemptAmount,jdbcType=INTEGER}, #{status,jdbcType=VARCHAR}, #{orderId,jdbcType=BIGINT}, 
+      #{inventoryId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.OrderInventoryPreempt" useGeneratedKeys="true">
+    insert into order_inventory_preempt
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="preemptAmount != null">
+        preempt_amount,
+      </if>
+      <if test="status != null">
+        `status`,
+      </if>
+      <if test="orderId != null">
+        order_id,
+      </if>
+      <if test="inventoryId != null">
+        inventory_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="preemptAmount != null">
+        #{preemptAmount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryId != null">
+        #{inventoryId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.OrderInventoryPreempt">
+    update order_inventory_preempt
+    <set>
+      <if test="preemptAmount != null">
+        preempt_amount = #{preemptAmount,jdbcType=INTEGER},
+      </if>
+      <if test="status != null">
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="orderId != null">
+        order_id = #{orderId,jdbcType=BIGINT},
+      </if>
+      <if test="inventoryId != null">
+        inventory_id = #{inventoryId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.OrderInventoryPreempt">
+    update order_inventory_preempt
+    set preempt_amount = #{preemptAmount,jdbcType=INTEGER},
+      `status` = #{status,jdbcType=VARCHAR},
+      order_id = #{orderId,jdbcType=BIGINT},
+      inventory_id = #{inventoryId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

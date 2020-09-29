@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lll.ecommerce.dao.StorehouseDao">
+  <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.Storehouse">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="admin_name" jdbcType="VARCHAR" property="adminName" />
+    <result column="admin_phone" jdbcType="VARCHAR" property="adminPhone" />
+    <result column="city_id" jdbcType="BIGINT" property="cityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, address, `name`, admin_name, admin_phone, city_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from storehouse
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from storehouse
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Storehouse" useGeneratedKeys="true">
+    insert into storehouse (address, `name`, admin_name, 
+      admin_phone, city_id)
+    values (#{address,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{adminName,jdbcType=VARCHAR}, 
+      #{adminPhone,jdbcType=VARCHAR}, #{cityId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Storehouse" useGeneratedKeys="true">
+    insert into storehouse
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="address != null">
+        address,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="adminName != null">
+        admin_name,
+      </if>
+      <if test="adminPhone != null">
+        admin_phone,
+      </if>
+      <if test="cityId != null">
+        city_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhone != null">
+        #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        #{cityId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.Storehouse">
+    update storehouse
+    <set>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="adminName != null">
+        admin_name = #{adminName,jdbcType=VARCHAR},
+      </if>
+      <if test="adminPhone != null">
+        admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null">
+        city_id = #{cityId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.Storehouse">
+    update storehouse
+    set address = #{address,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      admin_name = #{adminName,jdbcType=VARCHAR},
+      admin_phone = #{adminPhone,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

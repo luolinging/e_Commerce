@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lll.ecommerce.dao.OrderDao">
+  <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.Order">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="original_price" jdbcType="DOUBLE" property="originalPrice" />
+    <result column="pay_money" jdbcType="DOUBLE" property="payMoney" />
+    <result column="discounts_money" jdbcType="DOUBLE" property="discountsMoney" />
+    <result column="order_time" jdbcType="TIMESTAMP" property="orderTime" />
+    <result column="delivery_time" jdbcType="TIMESTAMP" property="deliveryTime" />
+    <result column="order_status" jdbcType="VARCHAR" property="orderStatus" />
+    <result column="pay_status" jdbcType="VARCHAR" property="payStatus" />
+    <result column="delivery_status" jdbcType="VARCHAR" property="deliveryStatus" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="business_id" jdbcType="BIGINT" property="businessId" />
+    <result column="address_id" jdbcType="BIGINT" property="addressId" />
+    <result column="delivery_method_id" jdbcType="BIGINT" property="deliveryMethodId" />
+    <result column="pay_method_id" jdbcType="BIGINT" property="payMethodId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, original_price, pay_money, discounts_money, order_time, delivery_time, order_status, 
+    pay_status, delivery_status, buyer_id, business_id, address_id, delivery_method_id, 
+    pay_method_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from order
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Order" useGeneratedKeys="true">
+    insert into order (original_price, pay_money, discounts_money, 
+      order_time, delivery_time, order_status, 
+      pay_status, delivery_status, buyer_id, 
+      business_id, address_id, delivery_method_id, 
+      pay_method_id)
+    values (#{originalPrice,jdbcType=DOUBLE}, #{payMoney,jdbcType=DOUBLE}, #{discountsMoney,jdbcType=DOUBLE}, 
+      #{orderTime,jdbcType=TIMESTAMP}, #{deliveryTime,jdbcType=TIMESTAMP}, #{orderStatus,jdbcType=VARCHAR}, 
+      #{payStatus,jdbcType=VARCHAR}, #{deliveryStatus,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, 
+      #{businessId,jdbcType=BIGINT}, #{addressId,jdbcType=BIGINT}, #{deliveryMethodId,jdbcType=BIGINT}, 
+      #{payMethodId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Order" useGeneratedKeys="true">
+    insert into order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="originalPrice != null">
+        original_price,
+      </if>
+      <if test="payMoney != null">
+        pay_money,
+      </if>
+      <if test="discountsMoney != null">
+        discounts_money,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="payStatus != null">
+        pay_status,
+      </if>
+      <if test="deliveryStatus != null">
+        delivery_status,
+      </if>
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
+      <if test="addressId != null">
+        address_id,
+      </if>
+      <if test="deliveryMethodId != null">
+        delivery_method_id,
+      </if>
+      <if test="payMethodId != null">
+        pay_method_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="originalPrice != null">
+        #{originalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payMoney != null">
+        #{payMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="discountsMoney != null">
+        #{discountsMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryTime != null">
+        #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryStatus != null">
+        #{deliveryStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="addressId != null">
+        #{addressId,jdbcType=BIGINT},
+      </if>
+      <if test="deliveryMethodId != null">
+        #{deliveryMethodId,jdbcType=BIGINT},
+      </if>
+      <if test="payMethodId != null">
+        #{payMethodId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.Order">
+    update order
+    <set>
+      <if test="originalPrice != null">
+        original_price = #{originalPrice,jdbcType=DOUBLE},
+      </if>
+      <if test="payMoney != null">
+        pay_money = #{payMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="discountsMoney != null">
+        discounts_money = #{discountsMoney,jdbcType=DOUBLE},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deliveryTime != null">
+        delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="payStatus != null">
+        pay_status = #{payStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="deliveryStatus != null">
+        delivery_status = #{deliveryStatus,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="addressId != null">
+        address_id = #{addressId,jdbcType=BIGINT},
+      </if>
+      <if test="deliveryMethodId != null">
+        delivery_method_id = #{deliveryMethodId,jdbcType=BIGINT},
+      </if>
+      <if test="payMethodId != null">
+        pay_method_id = #{payMethodId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.Order">
+    update order
+    set original_price = #{originalPrice,jdbcType=DOUBLE},
+      pay_money = #{payMoney,jdbcType=DOUBLE},
+      discounts_money = #{discountsMoney,jdbcType=DOUBLE},
+      order_time = #{orderTime,jdbcType=TIMESTAMP},
+      delivery_time = #{deliveryTime,jdbcType=TIMESTAMP},
+      order_status = #{orderStatus,jdbcType=VARCHAR},
+      pay_status = #{payStatus,jdbcType=VARCHAR},
+      delivery_status = #{deliveryStatus,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=BIGINT},
+      business_id = #{businessId,jdbcType=BIGINT},
+      address_id = #{addressId,jdbcType=BIGINT},
+      delivery_method_id = #{deliveryMethodId,jdbcType=BIGINT},
+      pay_method_id = #{payMethodId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

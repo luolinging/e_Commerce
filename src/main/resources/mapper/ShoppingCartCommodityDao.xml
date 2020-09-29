@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lll.ecommerce.dao.ShoppingCartCommodityDao">
+  <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="add_count" jdbcType="VARCHAR" property="addCount" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="business_id" jdbcType="BIGINT" property="businessId" />
+    <result column="purchase_now" jdbcType="BIT" property="purchaseNow" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, add_count, buyer_id, business_id, purchase_now
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from shopping_cart_commodity
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from shopping_cart_commodity
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity" useGeneratedKeys="true">
+    insert into shopping_cart_commodity (add_count, buyer_id, business_id, 
+      purchase_now)
+    values (#{addCount,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{businessId,jdbcType=BIGINT}, 
+      #{purchaseNow,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity" useGeneratedKeys="true">
+    insert into shopping_cart_commodity
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="addCount != null">
+        add_count,
+      </if>
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="businessId != null">
+        business_id,
+      </if>
+      <if test="purchaseNow != null">
+        purchase_now,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="addCount != null">
+        #{addCount,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseNow != null">
+        #{purchaseNow,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity">
+    update shopping_cart_commodity
+    <set>
+      <if test="addCount != null">
+        add_count = #{addCount,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="businessId != null">
+        business_id = #{businessId,jdbcType=BIGINT},
+      </if>
+      <if test="purchaseNow != null">
+        purchase_now = #{purchaseNow,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity">
+    update shopping_cart_commodity
+    set add_count = #{addCount,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=BIGINT},
+      business_id = #{businessId,jdbcType=BIGINT},
+      purchase_now = #{purchaseNow,jdbcType=BIT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

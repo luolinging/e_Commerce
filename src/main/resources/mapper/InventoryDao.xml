@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lll.ecommerce.dao.InventoryDao">
+  <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.Inventory">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="all_inventory_amount" jdbcType="INTEGER" property="allInventoryAmount" />
+    <result column="preempt_inventory" jdbcType="INTEGER" property="preemptInventory" />
+    <result column="in_transit_inventory" jdbcType="INTEGER" property="inTransitInventory" />
+    <result column="available_inventory" jdbcType="INTEGER" property="availableInventory" />
+    <result column="commodity_id" jdbcType="BIGINT" property="commodityId" />
+    <result column="storehouse_id" jdbcType="BIGINT" property="storehouseId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, all_inventory_amount, preempt_inventory, in_transit_inventory, available_inventory, 
+    commodity_id, storehouse_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from inventory
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from inventory
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Inventory" useGeneratedKeys="true">
+    insert into inventory (all_inventory_amount, preempt_inventory, 
+      in_transit_inventory, available_inventory, 
+      commodity_id, storehouse_id)
+    values (#{allInventoryAmount,jdbcType=INTEGER}, #{preemptInventory,jdbcType=INTEGER}, 
+      #{inTransitInventory,jdbcType=INTEGER}, #{availableInventory,jdbcType=INTEGER}, 
+      #{commodityId,jdbcType=BIGINT}, #{storehouseId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Inventory" useGeneratedKeys="true">
+    insert into inventory
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="allInventoryAmount != null">
+        all_inventory_amount,
+      </if>
+      <if test="preemptInventory != null">
+        preempt_inventory,
+      </if>
+      <if test="inTransitInventory != null">
+        in_transit_inventory,
+      </if>
+      <if test="availableInventory != null">
+        available_inventory,
+      </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
+      <if test="storehouseId != null">
+        storehouse_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="allInventoryAmount != null">
+        #{allInventoryAmount,jdbcType=INTEGER},
+      </if>
+      <if test="preemptInventory != null">
+        #{preemptInventory,jdbcType=INTEGER},
+      </if>
+      <if test="inTransitInventory != null">
+        #{inTransitInventory,jdbcType=INTEGER},
+      </if>
+      <if test="availableInventory != null">
+        #{availableInventory,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="storehouseId != null">
+        #{storehouseId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.Inventory">
+    update inventory
+    <set>
+      <if test="allInventoryAmount != null">
+        all_inventory_amount = #{allInventoryAmount,jdbcType=INTEGER},
+      </if>
+      <if test="preemptInventory != null">
+        preempt_inventory = #{preemptInventory,jdbcType=INTEGER},
+      </if>
+      <if test="inTransitInventory != null">
+        in_transit_inventory = #{inTransitInventory,jdbcType=INTEGER},
+      </if>
+      <if test="availableInventory != null">
+        available_inventory = #{availableInventory,jdbcType=INTEGER},
+      </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="storehouseId != null">
+        storehouse_id = #{storehouseId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.Inventory">
+    update inventory
+    set all_inventory_amount = #{allInventoryAmount,jdbcType=INTEGER},
+      preempt_inventory = #{preemptInventory,jdbcType=INTEGER},
+      in_transit_inventory = #{inTransitInventory,jdbcType=INTEGER},
+      available_inventory = #{availableInventory,jdbcType=INTEGER},
+      commodity_id = #{commodityId,jdbcType=BIGINT},
+      storehouse_id = #{storehouseId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>
