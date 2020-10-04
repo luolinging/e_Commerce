@@ -1,7 +1,12 @@
 package com.lll.ecommerce.dao;
 
 import com.lll.ecommerce.domain.pojo.Shop;
+import org.springframework.stereotype.Repository;
 
+/**
+ * @author luo
+ */
+@Repository
 public interface ShopDao {
     int deleteByPrimaryKey(Long id);
 

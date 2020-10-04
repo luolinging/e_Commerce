@@ -1,7 +1,12 @@
 package com.lll.ecommerce.dao;
 
 import com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod;
+import org.springframework.stereotype.Repository;
 
+/**
+ * @author luo
+ */
+@Repository
 public interface BusinessDeliveryMethodDao {
     int deleteByPrimaryKey(Long id);
 
