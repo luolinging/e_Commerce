@@ -161,7 +161,7 @@
     <dependency>
       <groupId>org.projectlombok</groupId>
       <artifactId>lombok</artifactId>
-      <version>1.16.12</version>
+      <version>1.18.8</version>
     </dependency>
     <!-- 谷歌java类库的依赖，如快速创建一个ArrayList，使用Lists.newArrayList() -->
     <dependency>

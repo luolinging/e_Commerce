@@ -3,13 +3,13 @@
 <mapper namespace="com.lll.ecommerce.dao.ShoppingCartCommodityDao">
   <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="add_count" jdbcType="VARCHAR" property="addCount" />
+    <result column="add_count" jdbcType="INTEGER" property="addCount" />
     <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
-    <result column="business_id" jdbcType="BIGINT" property="businessId" />
+    <result column="commodity_Id" jdbcType="BIGINT" property="commodityId" />
     <result column="purchase_now" jdbcType="BIT" property="purchaseNow" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, add_count, buyer_id, business_id, purchase_now
+    id, add_count, buyer_id, commodity_Id, purchase_now
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -22,9 +22,9 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity" useGeneratedKeys="true">
-    insert into shopping_cart_commodity (add_count, buyer_id, business_id, 
+    insert into shopping_cart_commodity (add_count, buyer_id, commodity_Id, 
       purchase_now)
-    values (#{addCount,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, #{businessId,jdbcType=BIGINT}, 
+    values (#{addCount,jdbcType=INTEGER}, #{buyerId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT},
       #{purchaseNow,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity" useGeneratedKeys="true">
@@ -36,8 +36,8 @@
       <if test="buyerId != null">
         buyer_id,
       </if>
-      <if test="businessId != null">
-        business_id,
+      <if test="commodityId != null">
+        commodity_Id,
       </if>
       <if test="purchaseNow != null">
         purchase_now,
@@ -45,13 +45,13 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="addCount != null">
-        #{addCount,jdbcType=VARCHAR},
+        #{addCount,jdbcType=INTEGER},
       </if>
       <if test="buyerId != null">
         #{buyerId,jdbcType=BIGINT},
       </if>
-      <if test="businessId != null">
-        #{businessId,jdbcType=BIGINT},
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=BIGINT},
       </if>
       <if test="purchaseNow != null">
         #{purchaseNow,jdbcType=BIT},
@@ -62,13 +62,13 @@
     update shopping_cart_commodity
     <set>
       <if test="addCount != null">
-        add_count = #{addCount,jdbcType=VARCHAR},
+        add_count = #{addCount,jdbcType=INTEGER},
       </if>
       <if test="buyerId != null">
         buyer_id = #{buyerId,jdbcType=BIGINT},
       </if>
-      <if test="businessId != null">
-        business_id = #{businessId,jdbcType=BIGINT},
+      <if test="commodityId != null">
+        commodity_Id = #{commodityId,jdbcType=BIGINT},
       </if>
       <if test="purchaseNow != null">
         purchase_now = #{purchaseNow,jdbcType=BIT},
@@ -78,9 +78,9 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.ShoppingCartCommodity">
     update shopping_cart_commodity
-    set add_count = #{addCount,jdbcType=VARCHAR},
+    set add_count = #{addCount,jdbcType=INTEGER},
       buyer_id = #{buyerId,jdbcType=BIGINT},
-      business_id = #{businessId,jdbcType=BIGINT},
+      commodity_Id = #{commodityId,jdbcType=BIGINT},
       purchase_now = #{purchaseNow,jdbcType=BIT}
     where id = #{id,jdbcType=BIGINT}
   </update>

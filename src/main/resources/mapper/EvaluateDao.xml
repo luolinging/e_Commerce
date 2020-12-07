@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lll.ecommerce.dao.EvaluateDao">
+  <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.Evaluate">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="evaluate_time" jdbcType="TIMESTAMP" property="evaluateTime" />
+    <result column="evaluate_info" jdbcType="VARCHAR" property="evaluateInfo" />
+    <result column="buyer_id" jdbcType="BIGINT" property="buyerId" />
+    <result column="order_commodity_id" jdbcType="BIGINT" property="orderCommodityId" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, evaluate_time, evaluate_info, buyer_id, order_commodity_id
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from evaluate
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectByOrderCommodityId" resultType="com.lll.ecommerce.domain.pojo.Evaluate">
+    select * from evaluate where order_commodity_id = #{orderCommodityId}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from evaluate
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Evaluate" useGeneratedKeys="true">
+    insert into evaluate (evaluate_time, evaluate_info, buyer_id, 
+      order_commodity_id)
+    values (#{evaluateTime,jdbcType=TIMESTAMP}, #{evaluateInfo,jdbcType=VARCHAR}, #{buyerId,jdbcType=BIGINT}, 
+      #{orderCommodityId,jdbcType=BIGINT})
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Evaluate" useGeneratedKeys="true">
+    insert into evaluate
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="evaluateTime != null">
+        evaluate_time,
+      </if>
+      <if test="evaluateInfo != null">
+        evaluate_info,
+      </if>
+      <if test="buyerId != null">
+        buyer_id,
+      </if>
+      <if test="orderCommodityId != null">
+        order_commodity_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="evaluateTime != null">
+        #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluateInfo != null">
+        #{evaluateInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderCommodityId != null">
+        #{orderCommodityId,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.Evaluate">
+    update evaluate
+    <set>
+      <if test="evaluateTime != null">
+        evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="evaluateInfo != null">
+        evaluate_info = #{evaluateInfo,jdbcType=VARCHAR},
+      </if>
+      <if test="buyerId != null">
+        buyer_id = #{buyerId,jdbcType=BIGINT},
+      </if>
+      <if test="orderCommodityId != null">
+        order_commodity_id = #{orderCommodityId,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.Evaluate">
+    update evaluate
+    set evaluate_time = #{evaluateTime,jdbcType=TIMESTAMP},
+      evaluate_info = #{evaluateInfo,jdbcType=VARCHAR},
+      buyer_id = #{buyerId,jdbcType=BIGINT},
+      order_commodity_id = #{orderCommodityId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

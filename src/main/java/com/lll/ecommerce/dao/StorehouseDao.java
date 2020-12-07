@@ -3,6 +3,8 @@ package com.lll.ecommerce.dao;
 import com.lll.ecommerce.domain.pojo.Storehouse;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author luo
  */
@@ -19,4 +21,6 @@ public interface StorehouseDao {
     int updateByPrimaryKeySelective(Storehouse record);
 
     int updateByPrimaryKey(Storehouse record);
+
+    List<Storehouse> selectByCityId(Long cityId);
 }

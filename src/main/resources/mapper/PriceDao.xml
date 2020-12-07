@@ -5,9 +5,10 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="price" jdbcType="DOUBLE" property="price" />
     <result column="city_id" jdbcType="BIGINT" property="cityId" />
+    <result column="commodity_id" jdbcType="BIGINT" property="commodityId" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, price, city_id
+    id, price, city_id, commodity_id
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -15,14 +16,23 @@
     from price
     where id = #{id,jdbcType=BIGINT}
   </select>
+
+  <select id="selectByCommodityIdAndCityId" resultType="java.lang.Double">
+    select price from price where commodity_id = #{commodityId} and city_id = #{cityId}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from price
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Price" useGeneratedKeys="true">
-    insert into price (price, city_id)
-    values (#{price,jdbcType=DOUBLE}, #{cityId,jdbcType=BIGINT})
+    insert into price (price, city_id, commodity_id
+      )
+    values (#{price,jdbcType=DOUBLE}, #{cityId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT}
+      )
   </insert>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Price" useGeneratedKeys="true">
     insert into price
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -32,6 +42,9 @@
       <if test="cityId != null">
         city_id,
       </if>
+      <if test="commodityId != null">
+        commodity_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="price != null">
@@ -39,6 +52,9 @@
       </if>
       <if test="cityId != null">
         #{cityId,jdbcType=BIGINT},
+      </if>
+      <if test="commodityId != null">
+        #{commodityId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
@@ -51,13 +67,17 @@
       <if test="cityId != null">
         city_id = #{cityId,jdbcType=BIGINT},
       </if>
+      <if test="commodityId != null">
+        commodity_id = #{commodityId,jdbcType=BIGINT},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.Price">
     update price
     set price = #{price,jdbcType=DOUBLE},
-      city_id = #{cityId,jdbcType=BIGINT}
+      city_id = #{cityId,jdbcType=BIGINT},
+      commodity_id = #{commodityId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

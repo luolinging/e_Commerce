@@ -1,6 +1,7 @@
 package com.lll.ecommerce.dao;
 
 import com.lll.ecommerce.domain.pojo.Inventory;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -19,4 +20,6 @@ public interface InventoryDao {
     int updateByPrimaryKeySelective(Inventory record);
 
     int updateByPrimaryKey(Inventory record);
+
+    int selectByCommodityIdAndStorehouseId(@Param("commodityId") Long commodityId, @Param("storehouseId") Long storehouseId);
 }

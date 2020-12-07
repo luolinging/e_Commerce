@@ -4,15 +4,18 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 价格
+ * price
  * @author 
  */
 @Data
-public class Price {
+public class Price implements Serializable {
     private Long id;
 
     private Double price;
 
     private Long cityId;
 
+    private Long commodityId;
+
+    private static final long serialVersionUID = 1L;
 }

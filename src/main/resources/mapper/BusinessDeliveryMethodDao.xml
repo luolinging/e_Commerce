@@ -15,6 +15,9 @@
     from business_delivery_method
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByBusinessId" parameterType="java.lang.Long" resultType="com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod">
+    select <include refid="Base_Column_List" /> from business_delivery_method where business_id = #{businessId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from business_delivery_method
     where id = #{id,jdbcType=BIGINT}

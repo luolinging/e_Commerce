@@ -3,6 +3,8 @@ package com.lll.ecommerce.dao;
 import com.lll.ecommerce.domain.pojo.BusinessDeliveryMethod;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author luo
  */
@@ -19,4 +21,6 @@ public interface BusinessDeliveryMethodDao {
     int updateByPrimaryKeySelective(BusinessDeliveryMethod record);
 
     int updateByPrimaryKey(BusinessDeliveryMethod record);
+
+    List<BusinessDeliveryMethod> selectByBusinessId(Long businessId);
 }

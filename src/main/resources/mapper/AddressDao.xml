@@ -19,6 +19,9 @@
     from address
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByBuyerId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from address where buyer_id = #{buyerId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from address
     where id = #{id,jdbcType=BIGINT}

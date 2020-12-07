@@ -1,11 +1,9 @@
 package com.lll.ecommerce.dao;
 
 import com.lll.ecommerce.domain.pojo.Price;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
-/**
- * @author luo
- */
 @Repository
 public interface PriceDao {
     int deleteByPrimaryKey(Long id);
@@ -19,4 +17,6 @@ public interface PriceDao {
     int updateByPrimaryKeySelective(Price record);
 
     int updateByPrimaryKey(Price record);
+
+    Double selectByCommodityIdAndCityId(@Param("commodityId") Long commodityId, @Param("cityId") Long cityId);
 }

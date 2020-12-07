@@ -3,9 +3,6 @@ package com.lll.ecommerce.dao;
 import com.lll.ecommerce.domain.pojo.Commodity;
 import org.springframework.stereotype.Repository;
 
-/**
- * @author luo
- */
 @Repository
 public interface CommodityDao {
     int deleteByPrimaryKey(Long id);

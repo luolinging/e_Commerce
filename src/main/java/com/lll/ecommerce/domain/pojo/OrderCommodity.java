@@ -4,11 +4,11 @@ import java.io.Serializable;
 import lombok.Data;
 
 /**
- * 订单商品表
+ * order_commodity
  * @author 
  */
 @Data
-public class OrderCommodity {
+public class OrderCommodity implements Serializable {
     private Long id;
 
     private Double realPayPrice;
@@ -21,4 +21,7 @@ public class OrderCommodity {
 
     private Long commodityId;
 
+    private Integer evaluated;
+
+    private static final long serialVersionUID = 1L;
 }

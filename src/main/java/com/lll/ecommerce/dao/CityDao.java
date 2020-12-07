@@ -1,6 +1,7 @@
 package com.lll.ecommerce.dao;
 
 import com.lll.ecommerce.domain.pojo.City;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 /**

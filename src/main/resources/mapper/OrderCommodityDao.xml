@@ -8,9 +8,10 @@
     <result column="discounts_value" jdbcType="DOUBLE" property="discountsValue" />
     <result column="order_id" jdbcType="BIGINT" property="orderId" />
     <result column="commodity_id" jdbcType="BIGINT" property="commodityId" />
+    <result column="evaluated" jdbcType="INTEGER" property="evaluated" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, real_pay_price, original_price, discounts_value, order_id, commodity_id
+    id, real_pay_price, original_price, discounts_value, order_id, commodity_id, evaluated
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
@@ -18,15 +19,20 @@
     from order_commodity
     where id = #{id,jdbcType=BIGINT}
   </select>
+  <select id="selectByCommodityId" resultType="com.lll.ecommerce.domain.pojo.OrderCommodity">
+    select * from order_commodity where commodity_id = #{commodityId}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from order_commodity
     where id = #{id,jdbcType=BIGINT}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.OrderCommodity" useGeneratedKeys="true">
     insert into order_commodity (real_pay_price, original_price, discounts_value, 
-      order_id, commodity_id)
+      order_id, commodity_id, evaluated
+      )
     values (#{realPayPrice,jdbcType=DOUBLE}, #{originalPrice,jdbcType=DOUBLE}, #{discountsValue,jdbcType=DOUBLE}, 
-      #{orderId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT})
+      #{orderId,jdbcType=BIGINT}, #{commodityId,jdbcType=BIGINT}, #{evaluated,jdbcType=INTEGER}
+      )
   </insert>
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.OrderCommodity" useGeneratedKeys="true">
     insert into order_commodity
@@ -46,6 +52,9 @@
       <if test="commodityId != null">
         commodity_id,
       </if>
+      <if test="evaluated != null">
+        evaluated,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="realPayPrice != null">
@@ -62,6 +71,9 @@
       </if>
       <if test="commodityId != null">
         #{commodityId,jdbcType=BIGINT},
+      </if>
+      <if test="evaluated != null">
+        #{evaluated,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -83,6 +95,9 @@
       <if test="commodityId != null">
         commodity_id = #{commodityId,jdbcType=BIGINT},
       </if>
+      <if test="evaluated != null">
+        evaluated = #{evaluated,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
@@ -92,7 +107,8 @@
       original_price = #{originalPrice,jdbcType=DOUBLE},
       discounts_value = #{discountsValue,jdbcType=DOUBLE},
       order_id = #{orderId,jdbcType=BIGINT},
-      commodity_id = #{commodityId,jdbcType=BIGINT}
+      commodity_id = #{commodityId,jdbcType=BIGINT},
+      evaluated = #{evaluated,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
 </mapper>

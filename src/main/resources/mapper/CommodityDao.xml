@@ -1,36 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.lll.ecommerce.dao.CommodityDao">
+
   <resultMap id="BaseResultMap" type="com.lll.ecommerce.domain.pojo.Commodity">
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="picture" jdbcType="VARCHAR" property="picture" />
     <result column="commodity_categories_id" jdbcType="BIGINT" property="commodityCategoriesId" />
-    <result column="price_id" jdbcType="BIGINT" property="priceId" />
     <result column="shop_id" jdbcType="BIGINT" property="shopId" />
   </resultMap>
+
   <sql id="Base_Column_List">
-    id, `name`, description, picture, commodity_categories_id, price_id, shop_id
+    id, `name`, description, picture, commodity_categories_id, shop_id
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from commodity
     where id = #{id,jdbcType=BIGINT}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from commodity
     where id = #{id,jdbcType=BIGINT}
   </delete>
+
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Commodity" useGeneratedKeys="true">
     insert into commodity (`name`, description, picture, 
-      commodity_categories_id, price_id, shop_id
-      )
+      commodity_categories_id, shop_id)
     values (#{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
-      #{commodityCategoriesId,jdbcType=BIGINT}, #{priceId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT}
-      )
+      #{commodityCategoriesId,jdbcType=BIGINT}, #{shopId,jdbcType=BIGINT})
   </insert>
+
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.lll.ecommerce.domain.pojo.Commodity" useGeneratedKeys="true">
     insert into commodity
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -45,9 +49,6 @@
       </if>
       <if test="commodityCategoriesId != null">
         commodity_categories_id,
-      </if>
-      <if test="priceId != null">
-        price_id,
       </if>
       <if test="shopId != null">
         shop_id,
@@ -66,14 +67,12 @@
       <if test="commodityCategoriesId != null">
         #{commodityCategoriesId,jdbcType=BIGINT},
       </if>
-      <if test="priceId != null">
-        #{priceId,jdbcType=BIGINT},
-      </if>
       <if test="shopId != null">
         #{shopId,jdbcType=BIGINT},
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.lll.ecommerce.domain.pojo.Commodity">
     update commodity
     <set>
@@ -89,23 +88,21 @@
       <if test="commodityCategoriesId != null">
         commodity_categories_id = #{commodityCategoriesId,jdbcType=BIGINT},
       </if>
-      <if test="priceId != null">
-        price_id = #{priceId,jdbcType=BIGINT},
-      </if>
       <if test="shopId != null">
         shop_id = #{shopId,jdbcType=BIGINT},
       </if>
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.lll.ecommerce.domain.pojo.Commodity">
     update commodity
     set `name` = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       picture = #{picture,jdbcType=VARCHAR},
       commodity_categories_id = #{commodityCategoriesId,jdbcType=BIGINT},
-      price_id = #{priceId,jdbcType=BIGINT},
       shop_id = #{shopId,jdbcType=BIGINT}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
 </mapper>

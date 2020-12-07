@@ -11,11 +11,11 @@ import lombok.Data;
 public class ShoppingCartCommodity {
     private Long id;
 
-    private String addCount;
+    private Integer addCount;
 
     private Long buyerId;
 
-    private Long businessId;
+    private Long commodityId;
 
     private Boolean purchaseNow;
 
