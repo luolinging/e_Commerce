@@ -136,6 +136,7 @@ public class CommodityDetailsController {
     public void test1(){
         // 罗玲玲
         //王昊的第一次修改，添加了特性一
+        //王昊的第二次修改，添加了特性二
     }
 
     @RequestMapping
