@@ -133,6 +133,11 @@ public class CommodityDetailsController {
     }
 
     @RequestMapping
+    public void test1(){
+        // 罗玲玲
+    }
+
+    @RequestMapping
     public void whTest(){
         //王昊的测试方法
     }
