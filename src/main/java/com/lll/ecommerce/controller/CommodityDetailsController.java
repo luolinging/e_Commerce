@@ -132,4 +132,9 @@ public class CommodityDetailsController {
         return Result.wrapSuccessResult(evaluates);
     }
 
+    @RequestMapping
+    public void whTest(){
+        //王昊的测试方法
+    }
+
 }
